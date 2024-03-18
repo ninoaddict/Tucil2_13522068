@@ -67,30 +67,25 @@ To properly run this project, ensure that the frontend is running at [localhost:
 
 <h2 id="usage">🐈‍⬛ Usage</h2>
 
-1. Select your input mode
-  ![File Input](https://github.com/ninoaddict/Tucil1_13522068/blob/main/public/file_input.png)
-  ![Random Input](https://github.com/ninoaddict/Tucil1_13522068/blob/main/public/random_input.png)
-2. Upload your .txt file or enter the inputs in the provided entries
-  ![Upload File](https://github.com/ninoaddict/Tucil1_13522068/blob/main/public/file_input_filled.png)
-  ![Fill Random Input Field](https://github.com/ninoaddict/Tucil1_13522068/blob/main/public/random_input_filled.png)
-3. If you select the file input mode, please make sure that your .txt file is in the following format
- ```
-buffer_size
-matrix_width matrix_height
-matrix
-number_of_sequences
-sequences_1
-sequences_1_reward
-sequences_2
-sequences_2_reward
-…
-sequences_n
-sequences_n_reward
-```  
+1. Enter the number of control points
+
+   ![Number of Control Points](https://github.com/ninoaddict/Tucil2_13522068/blob/main/src/frontend/public/number_of_point.png)
+   
+2. Input the number of iterations
+  
+   ![Number of Iteration](https://github.com/ninoaddict/Tucil2_13522068/blob/main/src/frontend/public/iteration.png)
+   
+3. Enter the coordinates of the points in the provided fields and select the algorithm type
+   
+   ![Input Points](https://github.com/ninoaddict/Tucil2_13522068/blob/main/src/frontend/public/input_points.png)
+   
 4. Click solve to see the result
-  ![Click](https://github.com/ninoaddict/Tucil1_13522068/blob/main/public/random_input_filled.png)
-5. You can download the result by clicking the download button
-  ![Result](https://github.com/ninoaddict/Tucil1_13522068/blob/main/public/result.png)
+   
+   ![Solve](https://github.com/ninoaddict/Tucil2_13522068/blob/main/src/frontend/public/result_curve.png)
+   
+5. You can reset the Bezier curve by clicking the "Reset" button. Additionally, view the curve for each iteration up to your specified iteration number by selecting the iteration options
+   
+   ![Result](https://github.com/ninoaddict/Tucil2_13522068/blob/main/src/frontend/public/bonus_iteration.png)
 
 <h2 id="author">🤵 Author</h2>
 <pre>
