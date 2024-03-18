@@ -43,7 +43,6 @@ func handleDnc(c *gin.Context) {
 		Result: result,
 		Time:   float64(executionTime.Microseconds()) / float64(1000),
 	}
-	// fmt.Println(response)
 	c.IndentedJSON(http.StatusCreated, response)
 }
 
@@ -64,7 +63,6 @@ func handleBruteforce(c *gin.Context) {
 		Result: result,
 		Time:   float64(executionTime.Microseconds()) / float64(1000),
 	}
-	// fmt.Println(response)
 	c.IndentedJSON(http.StatusCreated, response)
 }
 

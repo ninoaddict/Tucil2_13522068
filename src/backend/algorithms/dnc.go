@@ -10,7 +10,7 @@ func getMidPoints(bp models.BezierPoints) (models.BezierPoints, models.BezierPoi
 	right := models.BezierPoints{Iteration: bp.Iteration, Neff: 0, Points: []models.Point{}}
 
 	left.InsertAfter(models.BezierPoints{Neff: 1, Points: []models.Point{bp.Points[0]}, Iteration: bp.Iteration})
-	right.InsertBefore(models.BezierPoints{Neff: 1, Points: []models.Point{bp.Points[bp.Neff-1]}, Iteration: bp.Iteration})
+	right.InsertAfter(models.BezierPoints{Neff: 1, Points: []models.Point{bp.Points[bp.Neff-1]}, Iteration: bp.Iteration})
 	mid.InsertAfter(bp)
 	for i := 0; i < bp.Neff-1; i++ {
 		for j := 0; j < mid.Neff-1; j++ {
@@ -33,9 +33,9 @@ func findPoints(bp models.BezierPoints, dep int) models.BezierPoints {
 	leftMidPoints := findPoints(left, dep+1)
 	rightMidPoints := findPoints(right, dep+1)
 
-	mid.InsertBefore(leftMidPoints)
-	mid.InsertAfter(rightMidPoints)
-	return mid
+	leftMidPoints.InsertAfter(mid)
+	leftMidPoints.InsertAfter(rightMidPoints)
+	return leftMidPoints
 }
 
 func GetPointsDnc(bp models.BezierPoints) models.BezierPoints {

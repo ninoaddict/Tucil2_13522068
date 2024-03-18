@@ -5,18 +5,17 @@ import (
 	"math"
 )
 
-func calculateBezier(t float64, bp models.BezierPoints, low int, hi int) models.Point {
-	if low == hi {
-		return bp.Points[low]
+func calculateBezier(t float64, bp models.BezierPoints) models.Point {
+	res := models.BezierPoints{Iteration: bp.Iteration, Neff: 0, Points: []models.Point{}}
+	res.InsertAfter(bp)
+	for i := 0; i < bp.Neff-1; i++ {
+		for j := 0; j < res.Neff-1; j++ {
+			res.Points[j] = models.Point{X: (1-t)*res.Points[j].X + t*res.Points[j+1].X, Y: (1-t)*res.Points[j].Y + t*res.Points[j+1].Y}
+		}
+		res.Neff--
+		res.Points = res.Points[:res.Neff]
 	}
-	point1 := calculateBezier(t, bp, low, hi-1)
-	point2 := calculateBezier(t, bp, low+1, hi)
-	point1.X *= (1 - t)
-	point1.Y *= (1 - t)
-	point2.X *= t
-	point2.Y *= t
-	result := models.Point{X: point1.X + point2.X, Y: point1.Y + point2.Y}
-	return result
+	return res.Points[0]
 }
 
 func GetPointsBruteforce(bp models.BezierPoints) models.BezierPoints {
@@ -26,7 +25,7 @@ func GetPointsBruteforce(bp models.BezierPoints) models.BezierPoints {
 	iter := int(math.Pow(2, float64(bp.Iteration))) - 1
 	result := models.BezierPoints{Iteration: bp.Iteration, Neff: 2 + iter}
 	for i := 0; i < iter+2; i++ {
-		result.Points = append(result.Points, calculateBezier(float64(i)/float64(1+iter), bp, 0, bp.Neff-1))
+		result.Points = append(result.Points, calculateBezier(float64(i)/float64(1+iter), bp))
 	}
 	return result
 }
