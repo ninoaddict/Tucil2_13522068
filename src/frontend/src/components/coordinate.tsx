@@ -84,6 +84,10 @@ export default function Coordinate({
     setCurrIterPoint(newCurrResPoints);
   }
 
+  function setLabel(range: number, num: number) {
+    return num % range === 0;
+  }
+
   return (
     <div className="border-2 h-[705px] relative 2xl:min-w-[1000px] xl:min-w-[900px] lg:min-w-[800px] md:min-w-[500px]">
       <Mafs
@@ -94,7 +98,22 @@ export default function Coordinate({
           y: [viewContent[2], viewContent[3]],
         }}
       >
-        <Coordinates.Cartesian />
+        <Coordinates.Cartesian
+          xAxis={{
+            lines: Math.ceil((viewContent[1] - viewContent[0]) / 10),
+            labels: (n) =>
+              setLabel(Math.ceil((viewContent[1] - viewContent[0]) / 10), n)
+                ? n.toFixed(0)
+                : "",
+          }}
+          yAxis={{
+            lines: Math.ceil((viewContent[3] - viewContent[2]) / 10),
+            labels: (n) =>
+              setLabel(Math.ceil((viewContent[3] - viewContent[2]) / 10), n)
+                ? n.toFixed(0)
+                : "",
+          }}
+        />
         {points.map((point, index) => {
           if (index > 0 && resultPoints.length > 0) {
             return (
@@ -152,6 +171,7 @@ export default function Coordinate({
                   x={point.x}
                   y={point.y}
                   color="#5C8374"
+                  svgCircleProps={{ r: 4 }}
                 />
                 <Line.Segment
                   key={"line-" + index}
